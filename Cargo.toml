@@ -6,3 +6,29 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+#  Low level access to Cortex-M processors 
+cortex-m = "0.7.3"
+# Startup code and minimal runtime for Cortex-M microcontrollers
+cortex-m-rt = "0.7.0"
+#  A Hardware Abstraction Layer (HAL) for embedded systems 
+embedded-hal = { version = "0.2.5", features=["unproven"] }
+# Library for Duration, Rate, Clock abstractions 
+embedded-time = "0.12.0"
+# A highly efficient logging framework that targets resource-constrained devices, like microcontrollers 
+defmt = "0.3.0"
+# Transmit defmt logs through RTT (Real Time Transfer)
+defmt-rtt = "0.3.0"
+# Log panic message using defmt logging 
+panic-probe = { version = "0.3.0", features = ["print-defmt"] }
+# Not suing a board support package so we need to the use following 
+rp2040-hal = { version="0.3.0", features=["rt"] }
+rp2040-boot2 = "0.2.0"
+
+# cargo build/run
+[profile.dev]
+codegen-units = 1
+debug = 2
+debug-assertions = true
+incremental = false
+opt-level = 3
+overflow-checks = true
